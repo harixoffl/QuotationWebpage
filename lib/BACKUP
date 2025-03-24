@@ -1,0 +1,52 @@
+
+// void startDownload() async {
+//   quotationController.quotationModel.isDownloading.value=true;
+
+//   await Future.delayed(const Duration(seconds: 3));
+
+//   quotationController.quotationModel.isDownloading.value=false;
+// }
+
+
+// Future<void> printExistingPdf() async {
+//     try {
+//       final ByteData pdfData = await rootBundle.load('assets/pdf/installation_invoice.pdf');
+//       final Uint8List pdfBytes = pdfData.buffer.asUint8List();
+
+//       await Printing.layoutPdf(
+//         onLayout: (PdfPageFormat format) async => pdfBytes,
+//       );
+//     } catch (e) {
+//       print("Failed to load PDF: $e");
+//     }
+//   }
+
+    // const SizedBox(height: 16),
+                    // TextField(
+                    //   onChanged: (value) => rejectQuotationController.rejectModel.feedback.value = value,
+                    //   maxLines: 5,
+                    //   style: const TextStyle(color: Colors.white),
+                    //   decoration: const InputDecoration(
+                    //     contentPadding: EdgeInsets.all(10),
+                    //     filled: true,
+                    //     fillColor: Primary_Colors.boxBackground,
+                    //     border: OutlineInputBorder(),
+                    //     focusedBorder: OutlineInputBorder(
+                    //       borderSide: BorderSide(
+                    //         color: Colors.black,
+                    //       ),
+                    //     ),
+                    //     enabledBorder: OutlineInputBorder(
+                    //       borderRadius: BorderRadius.only(
+                    //         topLeft: Radius.circular(5),topRight: Radius.circular(5),bottomLeft: Radius.circular(5),bottomRight: Radius.circular(5)),
+                    //         borderSide: BorderSide(
+                    //           color: Colors.black,
+                    //         ), 
+                    //     ),
+                    //     hintText: 'Enter your feedback',
+                    //     hintStyle: TextStyle( color:Colors.grey, fontSize: 13),
+                    //   ),
+                    // ),
+
+
+
