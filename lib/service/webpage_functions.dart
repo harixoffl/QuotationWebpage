@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:approve_reject_quotation/api_url.dart';
 import 'package:approve_reject_quotation/models/entities/Response_entities.dart';
-import 'package:approve_reject_quotation/models/entities/quotationPdf_entities.dart';
+import 'package:approve_reject_quotation/models/entities/webpage_entities.dart';
 import 'package:approve_reject_quotation/service/API_services/invoker.dart';
 import 'package:approve_reject_quotation/styles.dart';
 import 'package:approve_reject_quotation/controllers/webpage_controller.dart';

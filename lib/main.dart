@@ -1,5 +1,5 @@
 import 'package:approve_reject_quotation/service/API_services/invoker.dart';
-import 'package:approve_reject_quotation/views/screens/quotation_page.dart';
+import 'package:approve_reject_quotation/views/screens/webPage.dart';
 import 'package:approve_reject_quotation/controllers/webpage_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

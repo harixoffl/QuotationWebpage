@@ -21,7 +21,6 @@ class QuotationPage extends StatefulWidget with WebpageServices {
 
 class _QuotationPageState extends State<QuotationPage> with SingleTickerProviderStateMixin {
   final QuotationController quotationController = Get.find<QuotationController>();
-
   late AnimationController _controller;
   late Animation<double> _rotationAnimation;
 
@@ -49,7 +48,7 @@ class _QuotationPageState extends State<QuotationPage> with SingleTickerProvider
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
+    // final screenHeight = MediaQuery.of(context).size.height;
     // print(screenWidth);
     // print(screenHeight);
 
