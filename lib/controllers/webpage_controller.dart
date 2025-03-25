@@ -1,5 +1,4 @@
 import 'package:approve_reject_quotation/models/constants/webpage_constants.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class QuotationController extends GetxController {
@@ -21,10 +20,6 @@ class QuotationController extends GetxController {
   void clearError() {
     quotationModel.errorMessage.value = '';
   }
-
-  // void setRejectionReasons(List<Suggestion> reasons) {
-  //   quotationModel.suggestions.value = reasons;
-  // }
 
   String getFinalReason() {
     String customInput = quotationModel.customReasonController.value.text;

@@ -19,9 +19,7 @@ mixin WebpageServices {
   final QuotationController quotationController = Get.find<QuotationController>();
   // final quotationController.quotationModel quotationController.quotationModel = Get.find<quotationController.quotationModel>();
   final Invoker apiController = Get.find<Invoker>();
-  final String email = 'support@sporadasecure.com';
-  final String imageUrl = 'https://sporadasecure.com/';
-  final String websiteUrl = 'https://sporadasecure.com/';
+
   bool _isDialogShowing = false;
 
   Future<void> downloadPdf() async {
@@ -67,7 +65,7 @@ mixin WebpageServices {
   }
 
   void launchemail() async {
-    final Uri gmailUri = Uri.parse('https://mail.google.com/mail/?view=cm&fs=1&to=$email&su=Support%20Request&body=Hello,');
+    final Uri gmailUri = Uri.parse('https://mail.google.com/mail/?view=cm&fs=1&to=${quotationController.quotationModel.localEmail}&su=Support%20Request&body=Hello,');
 
     if (await canLaunchUrl(gmailUri)) {
       await launchUrl(gmailUri, mode: LaunchMode.externalApplication);
@@ -297,9 +295,63 @@ mixin WebpageServices {
         CMDmResponse value = CMDmResponse.fromJson(response);
         if (value.code) {
           print(value.data);
-          await Basic_dialog(context: context, title: "LOGO", content: value.message!, onOk: () {});
+          await Basic_dialog(context: context, title: "Fetching Quotation Details", content: value.message!, onOk: () {});
         } else {
-          await Basic_dialog(context: context, title: 'Uploading Logo', content: value.message ?? "", onOk: () {});
+          await Basic_dialog(context: context, title: 'Fetching Quotation Details', content: value.message ?? "", onOk: () {});
+        }
+      } else {
+        Basic_dialog(context: context, title: "SERVER DOWN", content: "Please contact administration!");
+      }
+    } catch (e) {
+      Basic_dialog(context: context, title: "ERROR", content: "$e");
+    }
+  }
+
+  void getReasons(context) async {
+    try {
+      Map<String, dynamic>? response = await apiController.GetbyToken(API.getReason_API, quotationController.quotationModel.secret);
+
+      if (response?['statusCode'] == 200) {
+        CMDmResponse value = CMDmResponse.fromJson(response ?? {});
+        if (value.code) {
+        } else {
+          await Basic_dialog(context: context, title: 'Fetch Organization List', content: value.message ?? "", onOk: () {});
+        }
+      } else {
+        Basic_dialog(context: context, title: "SERVER DOWN", content: "Please contact administration!");
+      }
+    } catch (e) {
+      Basic_dialog(context: context, title: "ERROR", content: "$e");
+    }
+  }
+
+  void approveQuote(context, int eventId) async {
+    try {
+      Map<String, dynamic> body = {"eventid": eventId};
+      Map<String, dynamic>? response = await apiController.GetbyQueryString(body, API.ApproveQuote_API, quotationController.quotationModel.secret);
+      if (response?['statusCode'] == 200) {
+        CMDlResponse value = CMDlResponse.fromJson(response ?? {});
+        if (value.code) {
+        } else {
+          await Basic_dialog(context: context, title: 'Approving Quote - Error', content: value.message ?? "", onOk: () {});
+        }
+      } else {
+        Basic_dialog(context: context, title: "SERVER DOWN", content: "Please contact administration!");
+      }
+    } catch (e) {
+      Basic_dialog(context: context, title: "ERROR", content: "$e");
+    }
+  }
+
+  void rejectQuote(context, int eventId, String reason) async {
+    try {
+      Map<String, dynamic> body = {"eventid": eventId, "reason": reason};
+      Map<String, dynamic>? response = await apiController.GetbyQueryString(body, API.RejectWithReason_API, quotationController.quotationModel.secret);
+      if (response?['statusCode'] == 200) {
+        CMDlResponse value = CMDlResponse.fromJson(response ?? {});
+        if (value.code) {
+        } else {
+          await Basic_dialog(context: context, title: 'Rejection Status - Error', content: value.message ?? "", onOk: () {});
         }
       } else {
         Basic_dialog(context: context, title: "SERVER DOWN", content: "Please contact administration!");

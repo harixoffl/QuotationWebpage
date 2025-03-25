@@ -25,9 +25,6 @@ class _QuotationPageState extends State<QuotationPage> with SingleTickerProvider
   late AnimationController _controller;
   late Animation<double> _rotationAnimation;
 
-  final String imageUrl = 'https://sporadasecure.com/';
-  final String websiteUrl = 'https://sporadasecure.com/';
-
   @override
   void dispose() {
     _controller.dispose();
@@ -44,6 +41,9 @@ class _QuotationPageState extends State<QuotationPage> with SingleTickerProvider
     // Start the animation when the page opens and keep it looping
     _controller.repeat(reverse: true);
     widget.GetQuoteDetails(context);
+    widget.getReasons(context);
+    widget.approveQuote(context, 1);
+    widget.rejectQuote(context, 1, "dont know");
   }
 
   @override
@@ -376,7 +376,7 @@ class _QuotationPageState extends State<QuotationPage> with SingleTickerProvider
                             MouseRegion(
                               cursor: SystemMouseCursors.click,
                               child: GestureDetector(
-                                onTap: () => widget.openUrl(imageUrl, mode: LaunchMode.externalApplication),
+                                onTap: () => widget.openUrl(quotationController.quotationModel.imageUrl, mode: LaunchMode.externalApplication),
                                 child: Image.asset(
                                   'assets/images/leaf.png',
                                   height: 70,
@@ -399,7 +399,7 @@ class _QuotationPageState extends State<QuotationPage> with SingleTickerProvider
                                 MouseRegion(
                                   cursor: SystemMouseCursors.click,
                                   child: GestureDetector(
-                                    onTap: () => widget.openUrl(websiteUrl, mode: LaunchMode.externalApplication),
+                                    onTap: () => widget.openUrl(quotationController.quotationModel.websiteUrl, mode: LaunchMode.externalApplication),
                                     child: const Text('www.sporadasecure.com', style: TextStyle(color: Colors.lightGreen, fontSize: 14)),
                                   ),
                                 ),
